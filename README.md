@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+cors
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+도메인 이름이 서로 다른 사이트간 api 요청을 할 때 허락된 사이트만 정보를 오갈수있게,
+그렇지 않으면 접근 못하게 차단;
 
-## Available Scripts
+a.com
+b.com
 
-In the project directory, you can run:
+link, src
 
-### `npm start`
+cors요청을 통해 a에서 b로 접근 도와줌
+script - same origin polish
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+splice(제거를 시작할 인덱스, 몇개를 제거할 것인가);
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+newBasket.splice(index,1)
 
-### `npm run build`
+findIndex()
+: array == [5, 12, 8, 130, 44];
+9보다 큰 곳의 위치를 알고싶다?
+3개가 존재?
+맨처음 조건을 만족하는 곳의 index를 반환한다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const OverNine = (e) => e > 9;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+array.findIndex(OverNine);
+// 1을 반환
+배열에서 12값의 위치
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+동일한 제품에는 문제가 생긴다.
 
-### `npm run eject`
+이것을 해결하기 위해 Redux
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+export const getBasketTotal = (basket) => {
+    basket?.reduce((amount, item) => item.price + amount, 0)
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+0 처음 값
+amount : 초기값이자 앞으로 축적될 값들이 저장도리 인수
+item : 현재의 아이템의 속성이 들어가는데 item.price 장바구니 아이템의 가격
+reduce 배열의 모든 값을 합산할 때 사용
+basket 배열에서 item의 price를 합산하기 위해 reduce 사용
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+0 <- 처음값이 얼마냐
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1000 + (item.price 1, item.price2, item.price3)
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-----------ex------------
+basket [2323,33,22]
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+첫번째 콜백 0(amount) + 2323(item.price 1)
+두번째 콜백 2323(amount) + 33 (item.price 2)
+세번째 콜백 2356(amount) + 22 (item.price 3)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+setprocess "
+setSucceed fasle
+setDisable true
 
-### Analyzing the Bundle Size
+disable => 처음에 true였다가 카드 적으면 false 됨
+process => ""엿다가 구매하기 누르면 ture였다가 false됨
+succeed => false 였다가 구매하기 누르면 false됨
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. process false여서, 구매하기 글자나오고, disabled true 이므로 버튼이 disabled된 상태(눌러도 아무것도 없음)
+2. 카드 CardElement, handleChange에 의해서 disable이 false가 되므로, 버튼은 succeeded 상태로 되는데, false이므르ㅗ form에 handleSubmit 활성호 되서,
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+process가 true 였다가 버튼은 disabled된 채로 처리중이라는 글자 뜨고,
+중간 과정처리후 다시 구매하기로 바귀면서 navigate에 의해 페이지 넘어간다.
